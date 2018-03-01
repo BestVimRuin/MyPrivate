@@ -1,0 +1,68 @@
+1、创建django项目
+    django-admin.exe startproject xxx(工程名)
+2、创建APP
+    cd xxx(工程名)
+    python manage.py startapp xxx(app名字)
+3、静态文件
+    project_settings.py
+    STATICFILES_DIRS = {
+        os.path.json(BASE_DIR, "static"),
+    }
+4、末班路径
+    DIRS ==> { os.path.json(BASE_DIR, 'templates'),}
+5、settings中
+    middleware
+        #注释csrf
+6、定义路由规则
+    urls.py
+        "login" --> 函数名
+7、定义视图函数
+    app下views.py
+        def func(request):
+            request.method      GET/POST
+            request.POST.get('xxx')
+            request.POST.get('', NONE)
+
+            return HttpResponse('字符串')
+            return render(request, "HTML模板路径")
+            return redirect('/只能填URL')
+8、模板渲染
+    --变量名
+        def func(request):
+            return render(request, "index.html", {"current_user", "zyh"})
+
+            index.html
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                <div>{{current_user}}</div>
+                </body>
+            </html>
+    --for循环
+        def func(request):
+            return render(request, "index.html", {
+                                                    "current_user", "zyh",
+                                                    'user_list':['111', '222'],
+                                                    'user_dict':{'k1':'v1', 'k2':'v2'}} )
+
+            index.html
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <div>{{current_user}}</div>
+                    <ul>
+                        {% for row in user_list %}
+                            <li>{{ row }}</li>
+                        {% endfor%}
+                        <li>{{ user_list.0 }}</li>
+                        <li>{{ user_list.k1 }}</li>
+                    </ul>
+                </body>
+            </html>
+    --if同理 
