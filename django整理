@@ -5,9 +5,9 @@
     python manage.py startapp xxx(app名字)
 3、静态文件
     project_settings.py
-    STATICFILES_DIRS = {
-        os.path.json(BASE_DIR, "static"),
-    }
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    )
 4、末班路径
     DIRS ==> { os.path.json(BASE_DIR, 'templates'),}
 5、settings中
