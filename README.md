@@ -1,1 +1,0 @@
-this is my performnace or my some private things
