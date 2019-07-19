@@ -1,0 +1,86 @@
+{
+    "name": "genDfmNormalSample",
+    "description": "Gen DeepFM Normal Sample",
+    "type": "DOCKER",
+    "inputs": [
+        {
+            "name": "run_flag",
+            "valueType": "FILE",
+            "value": ""
+        },
+		{
+            "name": "train_sample_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "client_feas_col_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "prdt_feas_col_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "client_feas_col_number_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "mean_std_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "discrete_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "quantile_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "train_flag",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "number_flag",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "result_train_sample_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "keytab_file",
+            "valueType": "FILE",
+            "value": ""
+        }
+    ],
+    "outputs": [
+        {
+            "name": "outputData0",
+            "valueType": "FILE"
+        }
+    ],
+    "dockerSpec": {
+        "resource": {
+            "cpu": 16,
+            "gpu": 0,
+            "memory": 65536
+        },
+        "command": "python3.6 genDfmNormalSample.py --input0=${inputs.run_flag} --input1=${inputs.train_sample_path} --input2=${inputs.client_feas_col_path} --input3=${inputs.prdt_feas_col_path} --input4=${inputs.client_feas_col_number_path} --input5=${inputs.mean_std_path} --input6=${inputs.discrete_path} --input7=${inputs.quantile_path} --input8=${inputs.train_flag} --input9=${inputs.number_flag} --input10=${inputs.result_train_sample_path} --input11=${inputs.keytab_file} --output0=${outputs.outputData0}",
+        "image": "cgcregistry.azurecr.io/cgc/tf15-py36-cpu:latest"
+    },
+    "codeDependency": {
+        "path": "hdfs://nameservice1/tmp/cgc/modules/genDfmNormalSample/dependency/genDfmNormalSample.tar",
+        "type": "TAR"
+    }
+}

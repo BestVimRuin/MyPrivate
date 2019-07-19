@@ -1,0 +1,97 @@
+{
+    "name": "dfmNormalPredict",
+    "description": "Normal DeepFM Model Predict",
+    "type": "DOCKER",
+    "inputs": [
+        {
+            "name": "run_flag",
+            "valueType": "FILE",
+            "value": ""
+        },
+		{
+            "name": "file_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "batch_size",
+            "valueType": "STRING",
+            "value": "1024"
+        },
+		{
+            "name": "embed_size",
+            "valueType": "STRING",
+            "value": "5"
+        },
+        {
+            "name": "hidden_layers",
+            "valueType": "STRING",
+            "value": "3"
+        },
+		{
+            "name": "hidden_units",
+            "valueType": "STRING",
+            "value": "1024,512,256"
+        },
+        {
+            "name": "num_classes",
+            "valueType": "STRING",
+            "value": "2"
+        },
+        {
+            "name": "test_size",
+            "valueType": "STRING",
+            "value": "0.2"
+        },
+        {
+            "name": "dropout",
+            "valueType": "STRING",
+            "value": "0.5"
+        },
+        {
+            "name": "lr",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "l2",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "model_file_path",
+            "valueType": "DIRECTORY",
+            "value": ""
+        },
+        {
+            "name": "result_hdfs_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "keytab_file",
+            "valueType": "FILE",
+            "value": ""
+        }
+    ],
+    "outputs": [
+        {
+            "name": "outputData0",
+            "valueType": "FILE"
+        }
+    ],
+    "dockerSpec": {
+        "resource": {
+            "cpu": 16,
+            "gpu": 0,
+            "memory": 100000
+        },
+        "command": "python3.6 dfmNormalPredict.py --input0=${inputs.run_flag} --input1=${inputs.file_path} --input2=${inputs.batch_size} --input3=${inputs.embed_size} --input4=${inputs.hidden_layers} --input5=${inputs.hidden_units} --input6=${inputs.num_classes} --input7=${inputs.test_size} --input8=${inputs.dropout} --input9=${inputs.lr} --input10=${inputs.l2} --input11=${inputs.model_file_path} --input12=${inputs.result_hdfs_path} --input13=${inputs.keytab_file} --output0=${outputs.outputData0}",
+        "image": "cgcregistry.azurecr.io/cgc/tf18-py36-cpu:latest"
+    },
+    "codeDependency": {
+        "path": "hdfs://nameservice1/tmp/cgc/modules/dfmNormalPredict/dependency/dfmNormalPredict.tar",
+        "type": "TAR"
+    }
+
+}

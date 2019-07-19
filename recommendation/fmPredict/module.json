@@ -1,0 +1,77 @@
+{
+    "name": "fmPredict",
+    "description": "FM Model Predict",
+    "type": "DOCKER",
+    "inputs": [
+        {
+            "name": "run_flag",
+            "valueType": "FILE",
+            "value": ""
+        },
+		{
+            "name": "file_path",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "batch_size",
+            "valueType": "STRING",
+            "value": "1024"
+        },
+		{
+            "name": "vector_dimension",
+            "valueType": "STRING",
+            "value": "5"
+        },
+        {
+            "name": "test_size",
+            "valueType": "STRING",
+            "value": "0.2"
+        },
+        {
+            "name": "lr",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "l2",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "model_file_path",
+            "valueType": "DIRECTORY",
+            "value": ""
+        },
+        {
+            "name": "result_hdfs_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "keytab_file",
+            "valueType": "FILE",
+            "value": ""
+        }
+    ],
+    "outputs": [
+        {
+            "name": "outputData0",
+            "valueType": "FILE"
+        }
+    ],
+    "dockerSpec": {
+        "resource": {
+            "cpu": 16,
+            "gpu": 0,
+            "memory": 100000
+        },
+        "command": "python3.6 fmPredict.py --input0=${inputs.run_flag} --input1=${inputs.file_path} --input2=${inputs.batch_size} --input3=${inputs.vector_dimension} --input4=${inputs.test_size} --input5=${inputs.lr} --input6=${inputs.l2} --input7=${inputs.model_file_path} --input8=${inputs.result_hdfs_path} --input9=${inputs.keytab_file} --output0=${outputs.outputData0}",
+        "image": "cgcregistry.azurecr.io/cgc/tf18-py36-cpu:latest"
+    },
+    "codeDependency": {
+        "path": "hdfs://nameservice1/tmp/cgc/modules/fmPredict/dependency/fmPredict.tar",
+        "type": "TAR"
+    }
+
+}

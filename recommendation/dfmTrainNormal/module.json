@@ -1,0 +1,117 @@
+{
+    "name": "dfmTrainNormal",
+    "description": "Normal DeepFM Model Train",
+    "type": "DOCKER",
+    "inputs": [
+        {
+            "name": "run_flag",
+            "valueType": "FILE",
+            "value": ""
+        },
+		{
+            "name": "train_file",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "eval_file",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "batch_size",
+            "valueType": "STRING",
+            "value": "1024"
+        },
+		{
+            "name": "embed_size",
+            "valueType": "STRING",
+            "value": "5"
+        },
+        {
+            "name": "hidden_layers",
+            "valueType": "STRING",
+            "value": "3"
+        },
+		{
+            "name": "hidden_units",
+            "valueType": "STRING",
+            "value": "1024,512,256"
+        },
+        {
+            "name": "num_classes",
+            "valueType": "STRING",
+            "value": "2"
+        },
+        {
+            "name": "test_size",
+            "valueType": "STRING",
+            "value": "0.2"
+        },
+        {
+            "name": "dropout",
+            "valueType": "STRING",
+            "value": "0.5"
+        },
+        {
+            "name": "lr",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "l2",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "max_train",
+            "valueType": "STRING",
+            "value": "100000"
+        },
+        {
+            "name": "optimizer_type",
+            "valueType": "STRING",
+            "value": "adam"
+        },
+        {
+            "name": "model_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "embedding_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "evaluation_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "keytab_file",
+            "valueType": "FILE",
+            "value": ""
+        }
+    ],
+    "outputs": [
+        {
+            "name": "outputData0",
+            "valueType": "FILE"
+        }
+    ],
+    "dockerSpec": {
+        "resource": {
+            "cpu": 16,
+            "gpu": 0,
+            "memory": 100000
+        },
+        "command": "python3.6 dfmNormalTrain.py --input0=${inputs.run_flag} --input1=${inputs.train_file} --input2=${inputs.eval_file} --input3=${inputs.batch_size} --input4=${inputs.embed_size} --input5=${inputs.hidden_layers} --input6=${inputs.hidden_units} --input7=${inputs.num_classes} --input8=${inputs.test_size} --input9=${inputs.dropout} --input10=${inputs.lr} --input11=${inputs.l2} --input12=${inputs.max_train} --input13=${inputs.optimizer_type} --input14=${inputs.model_path} --input15=${inputs.embedding_path} --input16=${inputs.evaluation_path} --input17=${inputs.keytab_file} --output0=${outputs.outputData0}",
+        "image": "cgcregistry.azurecr.io/cgc/tf18-py36-cpu:latest"
+    },
+    "codeDependency": {
+        "path": "hdfs://nameservice1/tmp/cgc/modules/dfmNormalTrain/dependency/dfmModelTrainNormal.tar",
+        "type": "TAR"
+    }
+
+}

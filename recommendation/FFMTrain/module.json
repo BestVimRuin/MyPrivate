@@ -1,0 +1,91 @@
+{
+    "name": "FFMTrain",
+    "description": "FFM Model Train",
+    "type": "DOCKER",
+    "inputs": [
+        {
+            "name": "run_flag",
+            "valueType": "FILE",
+            "value": ""
+        },
+		{
+            "name": "train_file",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "eval_file",
+            "valueType": "FILE",
+            "value": ""
+        },
+        {
+            "name": "batch_size",
+            "valueType": "STRING",
+            "value": "1024"
+        },
+		{
+            "name": "vector_dimension",
+            "valueType": "STRING",
+            "value": "5"
+        },
+        {
+            "name": "test_size",
+            "valueType": "STRING",
+            "value": "0.2"
+        },
+        {
+            "name": "lr",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "l2",
+            "valueType": "STRING",
+            "value": "0.001"
+        },
+        {
+            "name": "max_train",
+            "valueType": "STRING",
+            "value": "100000"
+        },
+        {
+            "name": "optimizer_type",
+            "valueType": "STRING",
+            "value": "adam"
+        },
+        {
+            "name": "model_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "evaluation_path",
+            "valueType": "STRING",
+            "value": ""
+        },
+        {
+            "name": "keytab_file",
+            "valueType": "FILE",
+            "value": ""
+        }
+    ],
+    "outputs": [
+        {
+            "name": "outputData0",
+            "valueType": "FILE"
+        }
+    ],
+    "dockerSpec": {
+        "resource": {
+            "cpu": 16,
+            "gpu": 0,
+            "memory": 100000
+        },
+        "command": "python3.6 FFMTrain.py --input0=${inputs.run_flag} --input1=${inputs.train_file} --input2=${inputs.eval_file} --input3=${inputs.batch_size} --input4=${inputs.vector_dimension} --input5=${inputs.test_size} --input6=${inputs.lr} --input7=${inputs.l2} --input8=${inputs.max_train} --input9=${inputs.optimizer_type} --input10=${inputs.model_path} --input11=${inputs.evaluation_path} --input12=${inputs.keytab_file} --output0=${outputs.outputData0}",
+        "image": "cgcregistry.azurecr.io/cgc/tf18-py36-cpu:latest"
+    },
+    "codeDependency": {
+        "path": "hdfs://nameservice1/tmp/cgc/modules/FFMTrain/dependency/FFMTrain.tar",
+        "type": "TAR"
+    }
+}
